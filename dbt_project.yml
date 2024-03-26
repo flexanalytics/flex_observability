@@ -1,0 +1,28 @@
+
+name: 'observability'
+version: '0.1.0'
+config-version: 2
+require-dbt-version: [">=1.3.0", "<2.0.0"]
+
+models:
+  flex_observability:
+    +materialized: table
+    tags: ['observability']
+    +schema: observability
+    staging:
+      +materialized: table
+      tags: ['observability']
+      +schema: observability_staging
+    views:
+      +materialized: view
+      tags: ['observability']
+      +schema: observability_views
+
+
+vars:
+  observability:
+    observability_view_schema: 'observability_views'
+    observability_core_schema: 'observability'
+    observability_staging_schema: 'observability_staging'
+    observability_base_schema: 'observability_base'
+

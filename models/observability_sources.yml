@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: observability
+    schema: '{{ target.schema }}_{{ var("observability")["observability_base_schema"] }}'
+    freshness:
+      warn_after: {count: 48, period: hour}
+      error_after: {count: 168, period: hour}
+    tables:
+    - name: alerts_anomaly_detection
+    - name: alerts_dbt_models
+    - name: alerts_dbt_source_freshness
+    - name: alerts_dbt_tests
+    - name: alerts_schema_changes
+    - name: anomaly_threshold_sensitivity
+    - name: data_monitoring_metrics
+    - name: dbt_artifacts_hashes
+    - name: dbt_columns
+    - name: dbt_exposures
+    - name: dbt_invocations
+    - name: dbt_metrics
+    - name: dbt_models
+    - name: dbt_run_results
+    - name: dbt_seeds
+    - name: dbt_snapshots
+    - name: dbt_source_freshness_results
+    - name: dbt_sources
+    - name: dbt_tests
+    - name: elementary_test_results
+    - name: enriched_columns
+    - name: information_schema_columns
+    - name: job_run_results
+    - name: metadata
+    - name: metrics_anomaly_score
+    - name: model_run_results
+    - name: monitors_runs
+    - name: schema_columns_snapshot
+    - name: snapshot_run_results
+    - name: test_result_rows

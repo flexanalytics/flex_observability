@@ -1,0 +1,453 @@
+version: 2
+
+models:
+  - name: definition_changes
+  - name: executions
+  - name: no_tests
+  - name: row_count_changes
+  - name: schema_changes
+  - name: test_results
+  - name: stg_model
+    meta:
+      hidden: true
+  - name: stg_run_result
+    meta:
+      hidden: true
+  - name: stg_seed
+    meta:
+      hidden: true
+  - name: stg_snapshot
+    meta:
+      hidden: true
+  - name: stg_test
+    meta:
+      hidden: true
+  - name: dim_model
+    description: "{{ doc('dim_model') }}"
+    config:
+      contract:
+        enforced: true
+    tests:
+      - elementary.schema_changes:
+          config:
+            severity: warn
+    meta:
+      label: Models
+      display_index: 3
+    columns:
+      - name: model_key
+        data_type: text
+        meta:
+          hidden: true
+        constraints:
+          - type: not_null
+          - type: primary_key
+            warn_unenforced: false
+        tests: &not_null_unique
+          - not_null
+          - unique
+      - name: database_name
+        data_type: text
+        meta:
+          label: Database Name
+          synonyms: # for business searching and natural language processing
+            - Database
+            - DB
+      - name: schema_name
+        data_type: text
+        meta:
+          label: Schema Name
+          synonyms: # for business searching and natural language processing
+            - Schema
+      - name: model_name
+        data_type: text
+        meta:
+          label: Model Name
+          synonyms: # for business searching and natural language processing
+            - Model
+            - Table
+      - name: description
+        data_type: varchar(65535)
+        meta:
+          label: Description
+      - name: package_name
+        data_type: text
+        meta:
+          label: Package Name
+      - name: materialization
+        data_type: text
+        meta:
+          label: Materialization
+      - name: tags
+        data_type: text
+        meta:
+          label: Tags
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Date Generated
+  - name: dim_seed
+    description: "{{ doc('dim_seed') }}"
+    config:
+      contract:
+        enforced: true
+    tests:
+      - elementary.schema_changes:
+          config:
+            severity: warn
+    meta:
+      label: Seeds
+      display_index: 3
+    columns:
+      - name: seed_key
+        data_type: text
+        meta:
+          hidden: true
+        constraints:
+          - type: not_null
+          - type: primary_key
+            warn_unenforced: false
+        tests: *not_null_unique
+      - name: database_name
+        data_type: text
+        meta:
+          label: Database Name
+          synonyms: # for business searching and natural language processing
+            - Database
+            - DB
+      - name: schema_name
+        data_type: text
+        meta:
+          label: Schema Name
+          synonyms: # for business searching and natural language processing
+            - Schema
+      - name: seed_name
+        data_type: text
+        meta:
+          label: Seed Name
+          synonyms: # for business searching and natural language processing
+            - Seed
+            - Source File
+      - name: description
+        data_type: varchar(65535)
+        meta:
+          label: Description
+      - name: package_name
+        data_type: text
+        meta:
+          label: Package Name
+      - name: tags
+        data_type: text
+        meta:
+          label: Tags
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Date Generated
+  - name: dim_snapshot
+    description: "{{ doc('dim_snapshot') }}"
+    config:
+      contract:
+        enforced: true
+    tests:
+      - elementary.schema_changes:
+          config:
+            severity: warn
+    meta:
+      label: Snapshots
+      display_index: 3
+    columns:
+      - name: snapshot_key
+        data_type: text
+        meta:
+          hidden: true
+        constraints:
+          - type: not_null
+          - type: primary_key
+            warn_unenforced: false
+        tests: *not_null_unique
+      - name: database_name
+        data_type: text
+        meta:
+          label: Database Name
+          synonyms: # for business searching and natural language processing
+            - Database
+            - DB
+      - name: schema_name
+        data_type: text
+        meta:
+          label: Schema Name
+          synonyms: # for business searching and natural language processing
+            - Schema
+      - name: snapshot_name
+        data_type: text
+        meta:
+          label: Snapshot Name
+          synonyms: # for business searching and natural language processing
+            - Snapshot
+      - name: description
+        data_type: varchar(65535)
+        meta:
+          label: Description
+      - name: package_name
+        data_type: text
+        meta:
+          label: Package Name
+      - name: materialization
+        data_type: text
+        meta:
+          label: Materialization
+      - name: tags
+        data_type: text
+        meta:
+          label: Tags
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Date Generated
+  - name: dim_test
+    description: "{{ doc('dim_test') }}"
+    config:
+      contract:
+        enforced: true
+    tests:
+      - elementary.schema_changes:
+          config:
+            severity: warn
+    meta:
+      label: Tests
+      display_index: 3
+    columns:
+      - name: test_key
+        data_type: text
+        meta:
+          hidden: true
+        constraints:
+          - type: not_null
+          - type: primary_key
+            warn_unenforced: false
+        tests: *not_null_unique
+      - name: database_name
+        data_type: text
+        meta:
+          label: Database Name
+          synonyms: # for business searching and natural language processing
+            - Database
+            - DB
+      - name: schema_name
+        data_type: text
+        meta:
+          label: Schema Name
+          synonyms: # for business searching and natural language processing
+            - Schema
+      - name: test_name
+        data_type: text
+        meta:
+          label: Test Name
+          synonyms: # for business searching and natural language processing
+            - Test
+            - Name
+      - name: test_category
+        data_type: text
+        meta:
+          label: Test Category
+      - name: test_column_name
+        data_type: text
+        meta:
+          label: Test Column Name
+      - name: configured_severity
+        data_type: text
+        meta:
+          label: Severity
+      - name: quality_dimension
+        data_type: text
+        meta:
+          label: Test Dimension
+      - name: warn_if
+        data_type: text
+        meta:
+          label: Warn On
+      - name: error_if
+        data_type: text
+        meta:
+          label: Error On
+      - name: test_namespace
+        data_type: text
+        meta:
+          label: Test Namespace
+      - name: package_name
+        data_type: text
+        meta:
+          label: Package Name
+      - name: tags
+        data_type: text
+        meta:
+          label: Tags
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Date Generated
+  - name: dim_execution
+    description: "{{ doc('dim_execution') }}"
+    config:
+      contract:
+        enforced: true
+    tests:
+      - elementary.schema_changes:
+          config:
+            severity: warn
+    meta:
+      label: Execution Dimension
+    columns:
+      - name: execution_key
+        data_type: text
+        meta:
+          hidden: true
+        constraints:
+          - type: not_null
+          - type: primary_key
+            warn_unenforced: false
+        tests: *not_null_unique
+      - name: execution_name
+        data_type: text
+        meta:
+          label: Execution Name
+          synonyms: # for business searching and natural language processing
+            - Execution
+            - Run
+      - name: status
+        data_type: text
+        meta:
+          label: Execution Status
+          synonyms: # for business searching and natural language processing
+            - Result
+      - name: resource_type
+        data_type: text
+        meta:
+          label: Resource Type
+      - name: full_refresh
+        data_type: bool
+        meta:
+          label: Full Refresh Flag
+      - name: materialization
+        data_type: text
+        meta:
+          label: Materialization
+      - name: materialized_schema
+        data_type: text
+        meta:
+          label: Schema Name
+      - name: materialized_database
+        data_type: text
+        meta:
+          label: Database Name
+      - name: description
+        data_type: varchar(65535)
+        meta:
+          label: Description
+      - name: package_name
+        data_type: text
+        meta:
+          label: Package Name
+      - name: tags
+        data_type: text
+        meta:
+          label: Tags
+      - name: most_recent_flag
+        data_type: integer
+        meta:
+          label: Most Recent (y/n)
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Date Generated
+  - name: fact_execution
+    description: "{{ doc('fact_execution') }}"
+    config:
+      contract:
+        enforced: true
+      tests:
+      - elementary.schema_changes:
+          config:
+            severity: warn
+    meta:
+      label: All Executions Fact
+      display_index: 1
+      joins:
+        - to: dim_model
+          type: inner #inner, left, right, full; default 'inner'
+          join_on:
+            - from_field: model_key
+              exp: '=' #optional; default '='; '=','<>'
+              to_field: model_key
+        - to: dim_seed
+          type: inner
+          join_on:
+            - from_field: seed_key
+              to_field: seed_key
+        - to: dim_test
+          type: inner
+          join_on:
+            - from_field: test_key
+              to_field: test_key
+        - to: dim_snapshot
+          type: inner
+          join_on:
+            - from_field: snapshot_key
+              to_field: snapshot_key
+        - to: dim_snapshot
+          type: inner
+          join_on:
+            - from_field: snapshot_key
+              to_field: snapshot_key
+        - to: dim_execution
+          type: inner
+          join_on:
+            - from_field: execution_key
+              to_field: execution_key
+    columns:
+    - name: execution_key
+      tests: *not_null_unique
+      data_type: text
+      meta:
+        hidden: true
+    - name: model_key
+      data_type: text
+      meta:
+        hidden: true
+    - name: test_key
+      data_type: text
+      meta:
+        hidden: true
+    - name: seed_key
+      data_type: text
+      meta:
+        hidden: true
+    - name: snapshot_key
+      data_type: text
+      meta:
+        hidden: true
+    - name: rows_affected
+      data_type: bigint
+      meta:
+        label: Rows Affected
+    - name: execution_time
+      data_type: decimal(10, 2)
+      meta:
+        label: Time To Execute
+    - name: execute_started_at
+      data_type: timestamp
+      meta:
+        label: Execution Started Time
+    - name: execute_completed_at
+      data_type: timestamp
+      meta:
+        label: Execution Completed Time
+    - name: compile_started_at
+      data_type: timestamp
+      meta:
+        label: Compile Started Time
+    - name: compile_completed_at
+      data_type: timestamp
+      meta:
+        label: Compile Completed Time
