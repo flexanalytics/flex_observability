@@ -6,7 +6,7 @@
 packages:
   ...
   - git: "https://github.com/flexanalytics/flex_observability.git"
-    revision: 0.1.0
+    revision: v0.2.0
   ...
 ```
 
