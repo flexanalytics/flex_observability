@@ -26,6 +26,7 @@ models:
       materialized: view
       schema: observability_views
   elementary:
+    tags: ['observability']
     schema: observability_base
 ...
 ```

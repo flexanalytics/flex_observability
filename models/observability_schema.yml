@@ -2,11 +2,249 @@ version: 2
 
 models:
   - name: definition_changes
+    meta:
+      label: Definition Changes
+    columns:
+      - name: model_execution_id
+        data_type: text
+        meta:
+          label: Model Execution ID
+      - name: unique_id
+        data_type: text
+        meta:
+          label: Unique ID
+      - name: invocation_id
+        data_type: text
+        meta:
+          label: Invocation ID
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Generated At
+      - name: execution_name
+        data_type: text
+        meta:
+          label: Execution Name
+      - name: rows_affected
+        data_type: integer
+        meta:
+          label: Rows Affected
+      - name: materialization
+        data_type: text
+        meta:
+          label: Materialization
+      - name: current_definition
+        data_type: text
+        meta:
+          label: Current Definition
+      - name: previous_definition
+        data_type: text
+        meta:
+          label: Previous Definition
   - name: executions
+    meta:
+      label: All Executions
+    columns:
+      - name: model_execution_id
+        data_type: text
+        meta:
+          label: Model Execution ID
+      - name: unique_id
+        data_type: text
+        meta:
+          label: Unique ID
+      - name: invocation_id
+        data_type: text
+        meta:
+          label: Invocation ID
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Generated At
+      - name: execution_name
+        data_type: text
+        meta:
+          label: Execution Name
+      - name: status
+        data_type: text
+        meta:
+          label: Execution Status
+      - name: execution_time
+        data_type: Integer
+        meta:
+          label: Execution Time
+      - name: rows_affected
+        data_type: integer
+        meta:
+          label: Rows Affected
+      - name: execute_started_at
+        data_type: datetime
+        meta:
+          label: Execution Started At
+      - name: execute_completed_at
+        data_type: datetime
+        meta:
+          label: Execution Completed At
+      - name: compile_started_at
+        data_type: datetime
+        meta:
+          label: Compile Started At
+      - name: compile_completed_at
+        data_type: datetime
+        meta:
+          label: Compile Completed At
+      - name: materialization
+        data_type: text
+        meta:
+          label: Materialization
+      - name: full_refresh
+        data_type: bool
+        meta:
+          label: Was Full Refresh
   - name: no_tests
+    meta:
+      label: Untested Models
+    columns:
+      - name: unique_id
+        data_type: text
+        meta:
+          label: Unique ID
+      - name: model_name
+        data_type: text
+        meta:
+          label: Model Name
+      - name: materialization
+        data_type: text
+        meta:
+          label: Materialization
+      - name: database_name
+        data_type: text
+        meta:
+          label: Database Name
+      - name: schema_name
+        data_type: text
+        meta:
+          label: Schema Name
+      - name: is_tested
+        data_type: bool
+        meta:
+          label: Is Tested
   - name: row_count_changes
+    meta:
+      label: Row Count Changes
+    columns:
+      - name: model_execution_id
+        data_type: text
+        meta:
+          label: Model Execution ID
+      - name: unique_id
+        data_type: text
+        meta:
+          label: Unique ID
+      - name: invocation_id
+        data_type: text
+        meta:
+          label: Invocation ID
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Generated At
+      - name: execution_name
+        data_type: text
+        meta:
+          label: Execution Name
+      - name: resource_type
+        data_type: text
+        meta:
+          label: Resource Type
+      - name: full_refresh
+        data_type: bool
+        meta:
+          label: Was Full Refresh
+      - name: materialization
+        data_type: text
+        meta:
+          label: Materialization
+      - name: rows_affected
+        data_type: integer
+        meta:
+          label: Rows Affected
+      - name: previous_row_count
+        data_type: integer
+        meta:
+          label: Previous Row Count
+      - name: perc_diff
+        data_type: decimal
+        meta:
+          label: Row Count Percent Difference
   - name: schema_changes
+    meta:
+      label: Schema Changes
+    columns:
+      - name: database_name
+        data_type: text
+        meta:
+          label: Database Name
+      - name: schema_name
+        data_type: text
+        meta:
+          label: Schema Name
+      - name: table_name
+        data_type: text
+        meta:
+          label: Table Name
+      - name: column_name
+        data_type: text
+        meta:
+          label: Column Name
+      - name: detected_at
+        data_type: datetime
+        meta:
+          label: Detected At
+      - name: test_sub_type
+        data_type: text
+        meta:
+          label: Test Type
+      - name: test_results_description
+        data_type: text
+        meta:
+          label: Test Result
   - name: test_results
+    meta:
+      label: Test Run Results
+    columns:
+      - name: model_execution_id
+        data_type: text
+        meta:
+          label: Model Execution ID
+      - name: unique_id
+        data_type: text
+        meta:
+          label: Unique ID
+      - name: invocation_id
+        data_type: text
+        meta:
+          label: Invocation ID
+      - name: generated_at
+        data_type: timestamp
+        meta:
+          label: Generated At
+      - name: execution_name
+        data_type: text
+        meta:
+          label: Execution Name
+      - name: status
+        data_type: text
+        meta:
+          label: Execution Status
+      - name: execution_time
+        data_type: Integer
+        meta:
+          label: Execution Time
+      - name: failures
+        data_type: integer
+        meta:
+          label: Failure Count
   - name: stg_model
     meta:
       hidden: true
