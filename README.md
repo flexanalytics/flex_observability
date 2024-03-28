@@ -19,18 +19,21 @@ packages:
 models:
 ...
   observability:
+    +materialized: table
     tags: ['observability']
-    materialized: table
-    schema: observability
+    +schema: observability
     staging:
-      materialized: table
-      schema: observability_staging
+      +materialized: view
+      tags: ['observability']
+      +schema: observability
     views:
-      materialized: view
-      schema: observability_views
+      +materialized: view
+      tags: ['observability']
+      +schema: observability
   elementary:
+    +materialized: table
     tags: ['observability']
-    schema: observability_base
+    +schema: 'observability_base'
 ...
 ```
 3. run `dbt deps` to install the package
