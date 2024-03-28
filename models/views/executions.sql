@@ -3,8 +3,7 @@ select
     unique_id,
     invocation_id,
     generated_at,
-    execution_name
-    status,
+    execution_name as status,
     execution_time,
     rows_affected,
     execute_started_at,

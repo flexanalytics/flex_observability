@@ -10,19 +10,14 @@ models:
     tags: ['observability']
     +schema: observability
     staging:
-      +materialized: table
+      +materialized: view
       tags: ['observability']
-      +schema: observability_staging
+      +schema: observability
     views:
       +materialized: view
       tags: ['observability']
-      +schema: observability_views
-
-
-vars:
-  observability:
-    observability_view_schema: 'observability_views'
-    observability_core_schema: 'observability'
-    observability_staging_schema: 'observability_staging'
-    observability_base_schema: 'observability_base'
-
+      +schema: observability
+  elementary:
+    +materialized: table
+    tags: ['observability']
+    +schema: 'observability_base'

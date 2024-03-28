@@ -1,5 +1,7 @@
 select
-    {{ dbt_utils.generate_surrogate_key(['run_result.model_execution_id']) }} as execution_key,
+    {{
+        dbt_utils.generate_surrogate_key(['run_result.model_execution_id'])
+    }} as execution_key,
     run_result.execution_name,
     run_result.status,
     run_result.resource_type,
@@ -28,9 +30,13 @@ select
         else 0
     end as most_recent_flag,
     cast(run_result.generated_at as datetime) as generated_at
-    -- most recent invocation for the day partition by package_name and generated_at
+-- most recent invocation for the day partition by package_name and generated_at
 from {{ ref('stg_run_result') }} as run_result
-left outer join {{ ref('stg_model') }} as mdl on run_result.unique_id = mdl.unique_id
-left outer join {{ ref('stg_test') }} as test on run_result.unique_id = test.unique_id
-left outer join {{ ref('stg_seed') }} as seed on run_result.unique_id = seed.unique_id
-left outer join {{ ref('stg_snapshot') }} as snap on run_result.unique_id = snap.unique_id
+left outer join {{ ref('stg_model') }} as mdl
+    on run_result.unique_id = mdl.unique_id
+left outer join {{ ref('stg_test') }} as test
+    on run_result.unique_id = test.unique_id
+left outer join {{ ref('stg_seed') }} as seed
+    on run_result.unique_id = seed.unique_id
+left outer join {{ ref('stg_snapshot') }} as snap
+    on run_result.unique_id = snap.unique_id

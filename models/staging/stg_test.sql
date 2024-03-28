@@ -6,7 +6,6 @@ select
     short_name as test_category,
     alias,
     test_column_name,
-    lower(severity) as configured_severity,
     warn_if,
     error_if,
     test_params,
@@ -25,5 +24,6 @@ select
     cast(generated_at as datetime) as generated_at,
     path,
     metadata_hash,
-    quality_dimension
+    quality_dimension,
+    lower(severity) as configured_severity
 from {{ source('observability', 'dbt_tests') }}

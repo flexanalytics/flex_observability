@@ -1,7 +1,3 @@
-{{ config(
-    schema='observability_staging'
-)}}
-
 select
     unique_id,
     alias,
