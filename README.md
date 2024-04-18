@@ -9,7 +9,7 @@ This project provides [observability](https://www.ibm.com/topics/data-observabil
 packages:
   ...
   - git: "https://github.com/flexanalytics/flex_observability.git"
-    revision: v0.3.1
+    revision: v0.4.0
   ...
 ```
 
