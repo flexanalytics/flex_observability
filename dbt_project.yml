@@ -21,3 +21,7 @@ models:
     +materialized: table
     tags: ['observability']
     +schema: 'observability_base'
+
+vars:
+  observability:
+    observability_base_schema: 'observability_base'
